@@ -71,6 +71,8 @@ export default {
         { name: "Add Group", url: "/add-group" },
         { name: "Classes", url: "/classes" },
         { name: "Add Class", url: "/add-class" },
+        { name: "Lecturers", url: "/lecturers" },
+        { name: "Add Lecturer", url: "/add-lecturer" },
       ],
     };
   },

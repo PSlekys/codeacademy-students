@@ -104,6 +104,39 @@ const routes = [
     },
   },
   {
+    path: "/lecturers",
+    name: "Lecturers",
+    component: () =>
+      import(
+        /* webpackChunkName: "lecturers" */ "../views/lecturers/Lecturers.vue"
+      ),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/add-lecturer",
+    name: "Add Lecturer",
+    component: () =>
+      import(
+        /* webpackChunkName: "addLecturer" */ "../views/lecturers/AddLecturer.vue"
+      ),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/edit-lecturer/:id?",
+    name: "Edit Lecturer",
+    component: () =>
+      import(
+        /* webpackChunkName: "editLecturer" */ "../views/lecturers/EditLecturer.vue"
+      ),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: "/login",
     name: "Login",
     component: () =>

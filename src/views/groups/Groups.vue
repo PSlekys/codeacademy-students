@@ -50,7 +50,18 @@ export default {
           let group = {};
           group.id = doc.id;
           group.name = doc.data().name;
-          group.lecturer = doc.data().lecturer;
+
+          firebase
+            .firestore()
+            .collection("lecturers")
+            .doc(doc.data().lecturer)
+            .get()
+            .then(
+              (lecturer) =>
+                (group.lecturer =
+                  lecturer.data().name + " " + lecturer.data().surname)
+            );
+
           group.students = [];
           doc.data().students.forEach((studentId, index) => {
             firebase

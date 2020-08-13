@@ -18,12 +18,11 @@
       <div class="field">
         <label class="label">Lecturer</label>
         <div class="control">
-          <input
-            class="input"
-            type="text"
-            v-model="lecturer"
-            placeholder="Petras Slekys"
-          />
+          <select v-model="lecturer">
+            <option v-for="lec in allLecturers" :key="lec.id" :value="lec.id">{{
+              lec.name + " " + lec.surname
+            }}</option>
+          </select>
         </div>
       </div>
 
@@ -69,6 +68,7 @@ export default {
     return {
       name: "",
       lecturer: "",
+      allLecturers: [],
       students: [],
       selectedStudents: [],
       error: false,
@@ -78,6 +78,20 @@ export default {
     };
   },
   beforeMount() {
+    firebase
+      .firestore()
+      .collection("lecturers")
+      .get()
+      .then((snapshot) =>
+        snapshot.docs.forEach((doc) =>
+          this.allLecturers.push({
+            id: doc.id,
+            name: doc.data().name,
+            surname: doc.data().surname,
+          })
+        )
+      );
+
     firebase
       .firestore()
       .collection("groups")
