@@ -29,6 +29,15 @@ const routes = [
     },
   },
   {
+    path: "/edit-student/:id",
+    name: "Edit Student",
+    component: () =>
+      import(/* webpackChunkName: "editStudent" */ "../views/EditStudent.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: "/groups",
     name: "Groups",
     component: () =>
@@ -38,10 +47,19 @@ const routes = [
     },
   },
   {
-    path: "/edit-student/:id",
-    name: "Edit Student",
+    path: "/add-group",
+    name: "Add Group",
     component: () =>
-      import(/* webpackChunkName: "editStudent" */ "../views/EditStudent.vue"),
+      import(/* webpackChunkName: "addGroup" */ "../views/AddGroup.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/edit-group/:id",
+    name: "Edit Group",
+    component: () =>
+      import(/* webpackChunkName: "editGroup" */ "../views/EditGroup.vue"),
     meta: {
       requiresAuth: true,
     },

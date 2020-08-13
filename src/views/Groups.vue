@@ -48,6 +48,7 @@ export default {
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
           let group = {};
+          group.id = doc.id;
           group.name = doc.data().name;
           group.lecturer = doc.data().lecturer;
           group.students = [];
