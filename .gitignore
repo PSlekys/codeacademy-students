@@ -3,7 +3,7 @@ node_modules
 /dist
 
 # Config Files
-/services/
+/src/services/
 
 # local env files
 .env.local
