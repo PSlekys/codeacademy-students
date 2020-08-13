@@ -38,6 +38,33 @@ const routes = [
     },
   },
   {
+    path: "/groups",
+    name: "Groups",
+    component: () =>
+      import(/* webpackChunkName: "groups" */ "../views/Groups.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/add-group",
+    name: "Add Group",
+    component: () =>
+      import(/* webpackChunkName: "addGroup" */ "../views/AddGroup.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/edit-group/:id",
+    name: "Edit Group",
+    component: () =>
+      import(/* webpackChunkName: "editGroup" */ "../views/EditGroup.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: "/login",
     name: "Login",
     component: () =>

@@ -67,6 +67,8 @@ export default {
       links: [
         { name: "Students", url: "/students" },
         { name: "Add Student", url: "/add-student" },
+        { name: "Groups", url: "/groups" },
+        { name: "Add Group", url: "/add-group" },
       ],
     };
   },
