@@ -29,6 +29,15 @@ const routes = [
     },
   },
   {
+    path: "/groups",
+    name: "Groups",
+    component: () =>
+      import(/* webpackChunkName: "groups" */ "../views/Groups.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: "/edit-student/:id",
     name: "Edit Student",
     component: () =>
