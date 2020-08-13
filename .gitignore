@@ -5,6 +5,9 @@ node_modules
 # Config Files
 /src/services/
 
+# Log Files
+.firebase/
+
 # local env files
 .env.local
 .env.*.local
