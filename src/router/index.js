@@ -11,18 +11,28 @@ const routes = [
     redirect: "/login",
   },
   {
-    path: "/home",
-    name: "Home",
-    component: () => import(/* webpackChunkName: "home" */ "../views/Home.vue"),
+    path: "/students",
+    name: "Students",
+    component: () =>
+      import(/* webpackChunkName: "students" */ "../views/Students.vue"),
     meta: {
       requiresAuth: true,
     },
   },
   {
-    path: "/about",
-    name: "About",
+    path: "/add-student",
+    name: "Add Student",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+      import(/* webpackChunkName: "addStudent" */ "../views/AddStudent.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/edit-student/:id",
+    name: "Edit Student",
+    component: () =>
+      import(/* webpackChunkName: "editStudent" */ "../views/EditStudent.vue"),
     meta: {
       requiresAuth: true,
     },
@@ -58,7 +68,7 @@ router.beforeEach((to, from, next) => {
     if (!user && to.matched.some((route) => route.meta.requiresAuth)) {
       next({ path: "/login" });
     } else if (user && to.matched.some((route) => route.meta.requiresAnon)) {
-      next({ path: "/home" });
+      next({ path: "/students" });
     } else {
       next();
     }
