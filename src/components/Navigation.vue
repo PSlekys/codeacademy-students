@@ -65,8 +65,8 @@ export default {
       loggedIn: false,
       email: "",
       links: [
-        { name: "Home", url: "/home" },
-        { name: "About", url: "/about" },
+        { name: "Students", url: "/students" },
+        { name: "Add Student", url: "/add-student" },
       ],
     };
   },
