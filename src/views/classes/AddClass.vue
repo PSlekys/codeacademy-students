@@ -1,5 +1,5 @@
 <template>
-  <div class="add-student">
+  <div class="add-class">
     <Notification
       v-if="error"
       v-on:close="error = false"
@@ -9,38 +9,17 @@
 
     <form v-on:submit.prevent="add">
       <div class="field">
-        <label class="label">Name</label>
+        <label class="label">Group</label>
         <div class="control">
-          <input
-            class="input"
-            type="text"
-            v-model="name"
-            placeholder="Petras"
-          />
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Surname</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            v-model="surname"
-            placeholder="Slekys"
-          />
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Email</label>
-        <div class="control">
-          <input
-            class="input"
-            type="email"
-            v-model="email"
-            placeholder="e.g. alexsmith@gmail.com"
-          />
+          <select v-model="group">
+            <option
+              v-for="singleGroup in groups"
+              :key="singleGroup.id"
+              :value="singleGroup.id"
+            >
+              {{ singleGroup.name }}
+            </option>
+          </select>
         </div>
       </div>
 
@@ -51,7 +30,7 @@
             :class="loading && 'is-loading'"
             type="submit"
           >
-            Add Student
+            Add Class
           </button>
         </div>
       </div>
@@ -62,37 +41,49 @@
 <script>
 import firebase from "firebase/app";
 import "firebase/firestore";
-import Notification from "../components/Notification";
+import Notification from "../../components/Notification";
 
 export default {
-  name: "AddStudent",
+  name: "AddClass",
   components: { Notification },
   data() {
     return {
-      name: "",
-      surname: "",
-      email: "",
+      group: "",
+      groups: [],
       error: false,
       errorMessage: "",
       errorType: "",
       loading: false,
     };
   },
+  beforeMount() {
+    firebase
+      .firestore()
+      .collection("groups")
+      .get()
+      .then((snapshot) =>
+        snapshot.docs.forEach((doc) => {
+          this.groups.push({
+            id: doc.id,
+            name: doc.data().name,
+          });
+        })
+      );
+  },
   methods: {
     add() {
       this.loading = true;
       firebase
         .firestore()
-        .collection("students")
+        .collection("classes")
         .add({
-          name: this.name,
-          surname: this.surname,
-          email: this.email,
+          date: new Date(),
+          group: this.group,
         })
         .then(() => {
           this.error = true;
           this.errorType = "is-success";
-          this.errorMessage = "You have successfully added a new student";
+          this.errorMessage = "You have successfully added a new class";
           this.loading = false;
         })
         .catch((error) => {

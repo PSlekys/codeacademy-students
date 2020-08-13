@@ -1,24 +1,12 @@
 <template>
-  <div class="register">
+  <div class="login">
     <Notification
       v-if="error"
       v-on:close="error = false"
       type="is-danger"
       :message="errorMessage"
     />
-    <form v-on:submit.prevent="register">
-      <div class="field">
-        <label class="label">Full Name</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            v-model="fullname"
-            placeholder="Petras Slekys"
-          />
-        </div>
-      </div>
-
+    <form v-on:submit.prevent="login">
       <div class="field">
         <label class="label">Email</label>
         <div class="control">
@@ -50,7 +38,7 @@
             :class="loading && 'is-loading'"
             type="submit"
           >
-            Register
+            Login
           </button>
         </div>
       </div>
@@ -59,14 +47,15 @@
 </template>
 
 <script>
-import Notification from "../components/Notification";
+import firebase from "firebase/app";
+import "firebase/auth";
+import Notification from "../../components/Notification";
 
 export default {
-  name: "Register",
+  name: "Login",
   components: { Notification },
   data() {
     return {
-      fullname: "",
       email: "",
       password: "",
       error: false,
@@ -75,10 +64,19 @@ export default {
     };
   },
   methods: {
-    register() {
+    login() {
       this.loading = true;
-      this.error = true;
-      this.errorMessage = "Registration is disabled";
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(
+          () => this.$router.push("/"),
+          (error) => {
+            this.error = true;
+            this.errorMessage = error.message;
+            this.loading = false;
+          }
+        );
     },
   },
 };

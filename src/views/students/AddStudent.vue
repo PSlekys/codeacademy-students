@@ -1,5 +1,5 @@
 <template>
-  <div class="add-group">
+  <div class="add-student">
     <Notification
       v-if="error"
       v-on:close="error = false"
@@ -11,34 +11,36 @@
       <div class="field">
         <label class="label">Name</label>
         <div class="control">
-          <input class="input" type="text" v-model="name" placeholder="FE1" />
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Lecturer</label>
-        <div class="control">
           <input
             class="input"
             type="text"
-            v-model="lecturer"
-            placeholder="Petras Slekys"
+            v-model="name"
+            placeholder="Petras"
           />
         </div>
       </div>
 
       <div class="field">
-        <label class="label">Students</label>
-        <div class="control" v-for="student in students" :key="student.id">
-          <label>
-            <input
-              class="checkbox"
-              type="checkbox"
-              :value="student.id"
-              v-model="selectedStudents"
-            />
-            {{ student.name + " " + student.surname }}
-          </label>
+        <label class="label">Surname</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            v-model="surname"
+            placeholder="Slekys"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input
+            class="input"
+            type="email"
+            v-model="email"
+            placeholder="e.g. alexsmith@gmail.com"
+          />
         </div>
       </div>
 
@@ -49,7 +51,7 @@
             :class="loading && 'is-loading'"
             type="submit"
           >
-            Add Group
+            Add Student
           </button>
         </div>
       </div>
@@ -60,53 +62,37 @@
 <script>
 import firebase from "firebase/app";
 import "firebase/firestore";
-import Notification from "../components/Notification";
+import Notification from "../../components/Notification";
 
 export default {
-  name: "Add Group",
+  name: "AddStudent",
   components: { Notification },
   data() {
     return {
       name: "",
-      lecturer: "",
-      students: [],
-      selectedStudents: [],
+      surname: "",
+      email: "",
       error: false,
       errorMessage: "",
       errorType: "",
       loading: false,
     };
   },
-  beforeMount() {
-    firebase
-      .firestore()
-      .collection("students")
-      .get()
-      .then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          this.students.push({
-            id: doc.id,
-            name: doc.data().name,
-            surname: doc.data().surname,
-          });
-        });
-      });
-  },
   methods: {
-    edit() {
+    add() {
       this.loading = true;
       firebase
         .firestore()
-        .collection("groups")
+        .collection("students")
         .add({
           name: this.name,
-          lecturer: this.lecturer,
-          students: this.selectedStudents,
+          surname: this.surname,
+          email: this.email,
         })
         .then(() => {
           this.error = true;
           this.errorType = "is-success";
-          this.errorMessage = "You have successfully added a new group";
+          this.errorMessage = "You have successfully added a new student";
           this.loading = false;
         })
         .catch((error) => {

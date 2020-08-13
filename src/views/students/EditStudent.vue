@@ -62,7 +62,7 @@
 <script>
 import firebase from "firebase/app";
 import "firebase/firestore";
-import Notification from "../components/Notification";
+import Notification from "../../components/Notification";
 
 export default {
   name: "Login",

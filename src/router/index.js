@@ -14,7 +14,9 @@ const routes = [
     path: "/students",
     name: "Students",
     component: () =>
-      import(/* webpackChunkName: "students" */ "../views/Students.vue"),
+      import(
+        /* webpackChunkName: "students" */ "../views/students/Students.vue"
+      ),
     meta: {
       requiresAuth: true,
     },
@@ -23,7 +25,9 @@ const routes = [
     path: "/add-student",
     name: "Add Student",
     component: () =>
-      import(/* webpackChunkName: "addStudent" */ "../views/AddStudent.vue"),
+      import(
+        /* webpackChunkName: "addStudent" */ "../views/students/AddStudent.vue"
+      ),
     meta: {
       requiresAuth: true,
     },
@@ -32,7 +36,9 @@ const routes = [
     path: "/edit-student/:id",
     name: "Edit Student",
     component: () =>
-      import(/* webpackChunkName: "editStudent" */ "../views/EditStudent.vue"),
+      import(
+        /* webpackChunkName: "editStudent" */ "../views/students/EditStudent.vue"
+      ),
     meta: {
       requiresAuth: true,
     },
@@ -41,7 +47,7 @@ const routes = [
     path: "/groups",
     name: "Groups",
     component: () =>
-      import(/* webpackChunkName: "groups" */ "../views/Groups.vue"),
+      import(/* webpackChunkName: "groups" */ "../views/groups/Groups.vue"),
     meta: {
       requiresAuth: true,
     },
@@ -50,7 +56,7 @@ const routes = [
     path: "/add-group",
     name: "Add Group",
     component: () =>
-      import(/* webpackChunkName: "addGroup" */ "../views/AddGroup.vue"),
+      import(/* webpackChunkName: "addGroup" */ "../views/groups/AddGroup.vue"),
     meta: {
       requiresAuth: true,
     },
@@ -59,7 +65,9 @@ const routes = [
     path: "/edit-group/:id",
     name: "Edit Group",
     component: () =>
-      import(/* webpackChunkName: "editGroup" */ "../views/EditGroup.vue"),
+      import(
+        /* webpackChunkName: "editGroup" */ "../views/groups/EditGroup.vue"
+      ),
     meta: {
       requiresAuth: true,
     },
@@ -68,7 +76,7 @@ const routes = [
     path: "/classes",
     name: "Classes",
     component: () =>
-      import(/* webpackChunkName: "classes" */ "../views/Classes.vue"),
+      import(/* webpackChunkName: "classes" */ "../views/classes/Classes.vue"),
     meta: {
       requiresAuth: true,
     },
@@ -77,7 +85,9 @@ const routes = [
     path: "/add-class",
     name: "Add Class",
     component: () =>
-      import(/* webpackChunkName: "addClass" */ "../views/AddClass.vue"),
+      import(
+        /* webpackChunkName: "addClass" */ "../views/classes/AddClass.vue"
+      ),
     meta: {
       requiresAuth: true,
     },
@@ -86,7 +96,9 @@ const routes = [
     path: "/edit-class/:id",
     name: "Edit Class",
     component: () =>
-      import(/* webpackChunkName: "editClass" */ "../views/EditClass.vue"),
+      import(
+        /* webpackChunkName: "editClass" */ "../views/classes/EditClass.vue"
+      ),
     meta: {
       requiresAuth: true,
     },
@@ -95,7 +107,7 @@ const routes = [
     path: "/login",
     name: "Login",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/Login.vue"),
+      import(/* webpackChunkName: "login" */ "../views/auth/Login.vue"),
     meta: {
       requiresAnon: true,
     },
@@ -104,7 +116,7 @@ const routes = [
     path: "/register",
     name: "Register",
     component: () =>
-      import(/* webpackChunkName: "register" */ "../views/Register.vue"),
+      import(/* webpackChunkName: "register" */ "../views/auth/Register.vue"),
     meta: {
       requiresAnon: true,
     },
