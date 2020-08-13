@@ -29,8 +29,8 @@
 
       <div class="field">
         <label class="label">Students</label>
-        <div class="control">
-          <label v-for="student in students" :key="student.id">
+        <div class="control" v-for="student in students" :key="student.id">
+          <label>
             <input
               class="checkbox"
               type="checkbox"
